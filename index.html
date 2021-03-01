@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>URL Cleaner</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+        <style>
+            .custom-input {
+                max-width: 95%;
+                width: 400px;
+                margin-bottom: 32px;
+            }
+        </style>
+    </head>
+    <body>
+        <section class="hero is-danger is-fullheight">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <input id="url" class="input is-danger custom-input" type="text" placeholder="URL" onchange="cleanAndCopy()" onpaste="paste()">
+                </div>
+            </div>
+        </section>
+        <script>
+            function cleanAndCopy() {
+                const input = document.getElementById('url')
+                const cleanedValue = input.value.split('?')[0]
+                input.value = cleanedValue
+                input.select()
+                input.setSelectionRange(0, 99999)
+                document.execCommand('copy')
+            }
+
+            function paste() {
+                setTimeout(() => {
+                    cleanAndCopy()
+                }, 100)
+            }
+        </script>
+    </body>
+</html>
